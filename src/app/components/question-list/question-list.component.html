@@ -1,6 +1,12 @@
 <div class="container">
-  <app-question-item
-    *ngFor="let item of questionList"
-    [questionItem]="item"
-  ></app-question-item>
+  <div *ngFor="let item of questionList" [questionItem]="item">
+    <ul class="list-group mb-3">
+      <li class="list-group-item active" aria-current="true">
+        {{ item.qid }} - {{ item.qname }}
+      </li>
+      <li class="list-group-item">
+        {{ item.options }}
+      </li>
+    </ul>
+  </div>
 </div>

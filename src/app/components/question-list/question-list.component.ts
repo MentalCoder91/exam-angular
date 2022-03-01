@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/Service/backend.service';
 import { Question } from 'src/app/Model/Question';
+import { FormArray, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-question-list',
@@ -9,6 +10,8 @@ import { Question } from 'src/app/Model/Question';
 })
 export class QuestionListComponent implements OnInit {
   questionList: Question[];
+
+  public checkBoxForm = new FormGroup({ questionsArray: new FormArray([]) });
 
   constructor(private backendService: BackendService) {}
 
@@ -19,6 +22,10 @@ export class QuestionListComponent implements OnInit {
         console.log('response received');
         console.log(response);
         this.questionList = response;
+
+        for (let item of this.questionList) {
+          console.log(item.options);
+        }
       },
       (error) => {
         //Error callback
