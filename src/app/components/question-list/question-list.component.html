@@ -1,12 +1,27 @@
 <div class="container">
-  <div *ngFor="let item of questionList" [questionItem]="item">
-    <ul class="list-group mb-3">
-      <li class="list-group-item active" aria-current="true">
-        {{ item.qid }} - {{ item.qname }}
-      </li>
-      <li class="list-group-item">
-        {{ item.options }}
-      </li>
-    </ul>
-  </div>
+  <form [formGroup]="checkBoxForm" (ngSubmit)="submit(checkBoxForm)">
+    <ng-container formArrayName="questionsArray">
+      <div
+        *ngFor="let x of returnQuestionsArray(); let i = index"
+        [formGroupName]="i"
+      >
+        <input type="text" formControlName="qname" />
+        <ng-container formArrayName="options">
+          <ul class="list-group mb-3">
+            <li
+              class="list-group-item active"
+              aria-current="true"
+              *ngFor="let y of returnOptions(x); let j = index"
+              [formGroupName]="j"
+            >
+              {{ item.qid }} - {{ item.qname }}
+            </li>
+            <li class="list-group-item">
+              {{ item.options }}
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+    </ng-container>
+  </form>
 </div>

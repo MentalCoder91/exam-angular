@@ -20,12 +20,8 @@ export class QuestionListComponent implements OnInit {
       (response) => {
         //Next callback
         console.log('response received');
-        console.log(response);
+        //console.log(response);
         this.questionList = response;
-
-        for (let item of this.questionList) {
-          console.log(item.options);
-        }
       },
       (error) => {
         //Error callback
@@ -37,5 +33,38 @@ export class QuestionListComponent implements OnInit {
         console.log('Request completed');
       }
     );
+
+    for (let x in this.questionList) {
+      //console.log(this.questionList[x].qname);
+      (<FormArray>this.checkBoxForm.get('questionsArray')).push(
+        new FormGroup({
+          qname: new FormControl(this.questionList[x].qname),
+          options: new FormArray(
+            this.loadOptions(this.questionList[x].options)
+          ),
+        })
+      );
+    }
+  }
+
+  loadOptions(arr) {
+    let controls = [];
+    for (let x in arr) {
+      controls.push(
+        new FormGroup({
+          select: new FormControl(arr[x].OptValue),
+        })
+      );
+    }
+
+    return controls;
+  }
+
+  submit(form) {
+    console.log('Hi');
+  }
+
+  returnQuestionsArray() {
+    return this.checkBoxForm.get('questionsArray')['controls'];
   }
 }
