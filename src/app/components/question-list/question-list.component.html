@@ -5,7 +5,8 @@
         *ngFor="let x of returnQuestionsArray(); let i = index"
         [formGroupName]="i"
       >
-        <input type="text" formControlName="qname" />
+        <input type="text" formControlName="qname" style="border: none" />
+
         <ng-container formArrayName="options">
           <ul class="list-group mb-3">
             <li
@@ -14,10 +15,7 @@
               *ngFor="let y of returnOptions(x); let j = index"
               [formGroupName]="j"
             >
-              {{ item.qid }} - {{ item.qname }}
-            </li>
-            <li class="list-group-item">
-              {{ item.options }}
+              {{ y }}
             </li>
           </ul>
         </ng-container>
