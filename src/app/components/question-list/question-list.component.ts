@@ -48,6 +48,11 @@ export class QuestionListComponent implements OnInit {
 
   loadOptions(arr) {
     let controls = [];
+    const array = arr.map((option) => {
+      //console.log(option);
+      return new FormControl(option)
+    });
+
     for (let x in arr) {
       console.log(arr[x].optValue);
       controls.push(
@@ -65,7 +70,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   returnQuestionsArray() {
-    //console.log(this.checkBoxForm.get('questionsArray')['controls']);
+    console.log(this.checkBoxForm.get('questionsArray')['controls']);
     return this.checkBoxForm.get('questionsArray')['controls'];
   }
 
